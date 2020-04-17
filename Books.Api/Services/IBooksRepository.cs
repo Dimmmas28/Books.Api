@@ -1,16 +1,28 @@
 ﻿using Books.Api.Entities;
+using Books.Api.ExternalModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Books.Api.Services
 {
-    interface IBooksRepository
+    public interface IBooksRepository
     {
-        //IEnumerable<Book> GetBooks();
+        IEnumerable<Book> GetBooks();
         //Book GetBook();
 
         Task<IEnumerable<Book>> GetBooksAsync();
 
-        Task<Book> GetBookAsync();
+        Task<IEnumerable<Book>> GetBooksAsync(IEnumerable<Guid> bookIds);
+
+        Task<BookCover> GetBookCoverAsync(string coverId);
+
+        Task<IEnumerable<BookCover>> GetBooksCoverAsync(Guid bookId);
+
+        Task<Book> GetBookAsync(Guid id);
+
+        void AddBook(Book bookToAdd);
+
+        Task<bool> SaveChangesAsync();
     }
 }
